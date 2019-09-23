@@ -1,1 +1,1 @@
-from tweetBot import main as tweetBot
+from tweetBot import main
