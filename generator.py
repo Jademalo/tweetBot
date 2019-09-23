@@ -37,6 +37,9 @@ def randomList(list):
 
 # Return a string of a random length and random amount of a text file
 def ebooksTweet(file, maxLength=100, minLength=30):
+    # Prevent a tweet being too long
+    if maxLength > 280:
+        maxLength = 280
     # Read File into a string
     fileString = fileToString(file)
     # Get the length of the tweet
