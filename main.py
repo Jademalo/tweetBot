@@ -13,14 +13,14 @@ import random
 
 # Convert a file to a list
 def fileToList(fileName):
-    fileRaw = open(fileName, "r")
+    fileRaw = open(fileName, "r", encoding="utf-8")
     fileString = fileRaw.read()
     fileList = fileString.split("\n")
     return list(filter(None, fileList))
 
 # Convert a file to a string
 def fileToString(fileName):
-    fileRaw = open(fileName, "r")
+    fileRaw = open(fileName, "r",  encoding="utf-8")
     return fileRaw.read()
 
 # Get a random int between 1 and the passed value
