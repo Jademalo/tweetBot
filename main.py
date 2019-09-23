@@ -68,21 +68,21 @@ def postTweet(tweetText, account, postFreq=1):                                  
 
 # Return a string of a random length and random amount of a text file
 def ebooksTweet(file):
-    #Read File into a string
+    # Read File into a string
     fileString = fileToString(file)
-    #Get the length of the tweet
+    # Get the length of the tweet
     tweetLength = int(random.randint(30,100))
-    #Find a point in the string to start
-    tweetStart = int(random.random()*(len(poemString)-140))
-    #Shorten the string, then split it into individual words
-    workingTweet = poemString[tweetStart:tweetStart+tweetLength].split(" ")
-    #Chop off the first word
+    # Find a point in the string to start
+    tweetStart = int(random.random()*(len(fileString)-140))
+    # Shorten the string, then split it into individual words
+    workingTweet = fileString[tweetStart:tweetStart+tweetLength].split(" ")
+    # Chop off the first word
     workingTweet = workingTweet[1:]
-    #Chop off the last word
+    # Chop off the last word
     workingTweet = workingTweet[:-1]
-    #Join the tweet back together
+    # Join the tweet back together
     finalTweet = " ".join(workingTweet)
-    #Return the final tweet
+    # Return the final tweet
     return finalTweet
 
 
