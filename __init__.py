@@ -1,4 +1,4 @@
-import tweetBot.keys, tweetBot.generator, tweetBot.poster
+import tweetBot.generator, tweetBot.poster
 
 # Add aliases when this module is imported
 tweetBot.ebooksGen = tweetBot.generator.ebooksGen
