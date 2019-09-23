@@ -85,7 +85,9 @@ def ebooksTweet(file):
     # Chop off the last word
     workingTweet = workingTweet[:-1]
     # Join the tweet back together
-    finalTweet = " ".join(workingTweet)
+    workingTweet = " ".join(workingTweet)
+    # Remove linebreaks
+    finalTweet = workingTweet.replace('\n', ' ').replace('\r', '')
     # Return the final tweet
     return finalTweet
 
