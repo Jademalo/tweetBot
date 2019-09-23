@@ -36,7 +36,7 @@ def randomList(list):
 #-------------------------------------------------------------------------------
 
 # Return a string of a random length and random amount of a text file
-def ebooksTweet(file, maxLength=100, minLength=30):
+def ebooksGen(file, maxLength=100, minLength=30):
     # Prevent a tweet being too long
     if maxLength > 280:
         maxLength = 280
@@ -61,7 +61,7 @@ def ebooksTweet(file, maxLength=100, minLength=30):
 
 
 # Return a string compositied from various files
-def genreTweet(gameFile, genreFile, genreExtraFile, altPostFreq=0, altGenreGameFreq=0, altGenreExtraFreq=0):
+def genreGen(gameFile, genreFile, genreExtraFile, altPostFreq=0, altGenreGameFreq=0, altGenreExtraFreq=0):
 
     # Convert the files into lists
     gameList = fileToList(gameFile)
