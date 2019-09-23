@@ -1,6 +1,7 @@
 #-------------------------------------------------------------------------------
 # Imports
 #-------------------------------------------------------------------------------
+import keys
 import tweepy
 import random
 
@@ -11,7 +12,7 @@ import random
 
 # Make a tweepy instance using the keys from the provided account variable
 def setTwitter(account):
-    consumer_key, consumer_secret, access_token, access_token_secret = tweetBot.keys.returnKeys(account)
+    consumer_key, consumer_secret, access_token, access_token_secret = keys.returnKeys(account)
 
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
