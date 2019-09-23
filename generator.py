@@ -1,10 +1,7 @@
 #-------------------------------------------------------------------------------
 # Imports
 #-------------------------------------------------------------------------------
-import keys
-import tweepy
 import random
-
 
 
 #-------------------------------------------------------------------------------
@@ -31,38 +28,6 @@ def randomInt(max):
 def randomList(list):
     listNumber = len(list)                                                      # Finding the length of the list
     return list[randomInt(listNumber) - 1]                                      # Generating a random value from that list, -1 since 0 is a value # Returning the specific value from the list based on the number generated
-
-
-
-#-------------------------------------------------------------------------------
-# Twitter related functions
-#-------------------------------------------------------------------------------
-
-# Make a tweepy instance using the keys from the provided account variable
-def setTwitter(account):
-    consumer_key, consumer_secret, access_token, access_token_secret = keys.returnKeys(account)
-
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
-    api = tweepy.API(auth)
-
-    return api
-
-# Post a tweet using the text, the account, and optional frequency
-def postTweet(tweetText, account, postFreq=1):                                  # postFreq is optional, if not passed it will always be 1 and always post
-    twitter = setTwitter(account)
-
-    # If postFreq is set to 0, don't do anything.
-    if postFreq == 0:
-        tweetPostDebug = ("No")
-    # Else, generate a random number using it, and if it's 1 then post the tweet
-    elif randomInt(postFreq) == 1:
-        tweetPostDebug = ("Yes")
-        twitter.update_status(status = tweetText)                               # Update the Status
-    else:
-        tweetPostDebug = ("No")
-
-    print("Post Tweet? -", tweetPostDebug)
 
 
 
@@ -99,14 +64,13 @@ def genreTweet(gameFile, genreFile, genreExtraFile, altPostFreq=0, altGenreGameF
     gameList = fileToList(gameFile)
     genreList = fileToList(genreFile)
     genreExtraList = fileToList(genreExtraFile)
-
     # Get a random game from the game list
     gameText = randomList(gameList)
+
 
     # Set debug info
     altGenreGameDebug = ("No")
     altGenreExtraDebug = ("No")
-
 
     # If a value has been passed for either of the alt genre variables
     if altGenreGameFreq != 0 or altGenreExtraFreq != 0:
@@ -126,7 +90,6 @@ def genreTweet(gameFile, genreFile, genreExtraFile, altPostFreq=0, altGenreGameF
     else:
         genreMode = 0
 
-
     # If the mode is set to standard, pick a string from the genre list
     if genreMode == 0:
         genreText = randomList(genreList)
@@ -142,9 +105,6 @@ def genreTweet(gameFile, genreFile, genreExtraFile, altPostFreq=0, altGenreGameF
         if genreText[-1:] == ("."):
             genreText = genreText[:-1]
         genreText = "".join((genreText, "like"))                                # There are two brackets because the first set makes a string from the two values, and second joins them
-
-
-
 
 
     # Work out of "a" or "an" is needed
