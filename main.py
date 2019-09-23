@@ -144,10 +144,7 @@ def genreTweet(gameFile, genreFile, genreExtraFile, altPostFreq=0, altGenreGameF
         genreText = "".join((genreText, "like"))                                # There are two brackets because the first set makes a string from the two values, and second joins them
 
 
-    print("Alternate Game as Genre? -", altGenreGameDebug)
-    print("Alternate Extra Genre? -", altGenreExtraDebug)
-    print("gameText =", gameText)
-    print("genreText =", genreText)
+
 
 
     # Work out of "a" or "an" is needed
@@ -170,6 +167,4 @@ def genreTweet(gameFile, genreFile, genreExtraFile, altPostFreq=0, altGenreGameF
 
     tweetText = "".join(workingTweet)
 
-    print("Alternate format? -", altPostDebug)
-
-    return tweetText
+    return tweetText, altGenreGameDebug, altGenreExtraDebug, gameText, genreText, altPostDebug
