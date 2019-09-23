@@ -71,7 +71,7 @@ def postTweet(tweetText, account, postFreq=1):                                  
 #-------------------------------------------------------------------------------
 
 # Return a string of a random length and random amount of a text file
-def ebooksTweet(file, maxLength=30, minLength=100):
+def ebooksTweet(file, maxLength=100, minLength=30):
     # Read File into a string
     fileString = fileToString(file)
     # Get the length of the tweet
