@@ -52,7 +52,11 @@ def setTwitter(account):
 def postTweet(tweetText, account, postFreq=1):                                  # postFreq is optional, if not passed it will always be 1 and always post
     twitter = setTwitter(account)
 
-    if randomInt(postFreq) == 1:
+    # If postFreq is set to 0, don't do anything.
+    if postFreq == 0:
+        tweetPostDebug = ("No")
+    # Else, generate a random number using it, and if it's 1 then post the tweet
+    elif randomInt(postFreq) == 1:
         tweetPostDebug = ("Yes")
         twitter.update_status(status = tweetText)                               # Update the Status
     else:
@@ -165,6 +169,5 @@ def genreTweet(gameFile, genreFile, genreExtraFile, altPostFreq=0, altGenreGameF
     tweetText = "".join(workingTweet)
 
     print("Alternate format? -", altPostDebug)
-    print("tweetText =", tweetText)
 
     return tweetText
