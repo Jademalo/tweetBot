@@ -158,7 +158,7 @@ def variantGen(nameFile, prefixFile, suffixFile):
         suffixText = randomList(suffixList)
 
 
-    # If statement to change the format of the question, then composite the final tweet
+    # Composite final tweet
     workingTweet = (prefixExtraText ,prefixText ,nameText ,suffixText)
 
     tweetText = "".join(workingTweet)
