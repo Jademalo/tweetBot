@@ -152,13 +152,13 @@ def variantGen(nameFile, prefixFile, suffixFile):
     if prefixRate >= 60:
         prefixExtraDebug = ("Yes")
         prefixExtraText = randomList(prefixList)
-    else
+    else:
         prefixExtraText = ""
     # If the random number is correct, add a suffix
     if suffixRate >= 90:
         suffixDebug = ("Yes")
         suffixText = randomList(suffixList)
-    else
+    else:
         suffixText = ""
 
 
