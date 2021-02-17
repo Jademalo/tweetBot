@@ -165,7 +165,10 @@ def variantGen(nameFile, prefixFile, suffixFile):
 
 
     # Composite final tweet
-    workingTweet = (prefixExtraText," ",prefixText," ",nameText," ",suffixText)
+    if prefixRate >= 60:
+        workingTweet = (prefixExtraText," ",prefixText," ",nameText," ",suffixText)
+    else:
+        workingTweet = (prefixText," ",nameText," ",suffixText)
 
     tweetText = "".join(workingTweet)
 
