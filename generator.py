@@ -134,7 +134,7 @@ def genreGen(gameFile, genreFile, genreExtraFile, altPostFreq=0, altGenreGameFre
 
 
 # Return a string composited from various files, with a random number of elements
-def variantGen(nameFile, prefixFile, suffixFile):
+def variantGen(nameFile, prefixFile, suffixFile, extraPrefixPercent, suffixPercent):
 
     # Convert the files into lists
     nameList = fileToList(nameFile)
@@ -149,14 +149,14 @@ def variantGen(nameFile, prefixFile, suffixFile):
     # Get a random prefix from the prefix list
     prefixText = randomList(prefixList)
     # If the random number is correct, add an additional prefix
-    if prefixRate >= 60:
+    if prefixRate < extraPrefixPercent:
         prefixExtraDebug = ("Yes")
         prefixExtraText = randomList(prefixList)
     else:
         prefixExtraDebug = ("No")
         prefixExtraText = ""
     # If the random number is correct, add a suffix
-    if suffixRate >= 90:
+    if suffixRate < suffixPercent:
         suffixDebug = ("Yes")
         suffixText = randomList(suffixList)
     else:
