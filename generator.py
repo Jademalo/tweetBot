@@ -131,3 +131,36 @@ def genreGen(gameFile, genreFile, genreExtraFile, altPostFreq=0, altGenreGameFre
     tweetText = "".join(workingTweet)
 
     return tweetText, altGenreGameDebug, altGenreExtraDebug, gameText, genreText, altPostDebug
+
+
+# Return a string composited from various files, with a random number of elements
+def variantGen(nameFile, prefixFile, suffixFile):
+
+    # Convert the files into lists
+    nameList = fileToList(nameFile)
+    prefixList = fileToList(prefixFile)
+    suffixList = fileToList(suffixFile)
+
+    prefixRate = randomInt(100)
+    suffixRate = randomInt(100)
+
+    # Get a random name from the name list
+    nameText = randomList(nameList)
+    # Get a random prefix from the prefix list
+    prefixText = randomList(prefixList)
+    # If the random number is correct, add an additional prefix
+    if prefixRate >= 60:
+        prefixExtraDebug = ("Yes")
+        prefixExtraText = randomList(prefixList)
+    # If the random number is correct, add a suffix
+    if suffixRate >= 90:
+        suffixDebug = ("Yes")
+        suffixText = randomList(suffixList)
+
+
+    # If statement to change the format of the question, then composite the final tweet
+    workingTweet = (prefixExtraText ,prefixText ,nameText ,suffixText)
+
+    tweetText = "".join(workingTweet)
+
+    return tweetText, nameText, prefixText, suffixText, prefixExtraText, prefixExtraDebug, suffixDebug
