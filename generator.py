@@ -165,7 +165,7 @@ def variantGen(nameFile, prefixFile, suffixFile):
 
 
     # Composite final tweet
-    workingTweet = (prefixExtraText ,prefixText ,nameText ,suffixText)
+    workingTweet = (prefixExtraText," ",prefixText," ",nameText," ",suffixText)
 
     tweetText = "".join(workingTweet)
 
