@@ -42,3 +42,23 @@ It returns a string using the Genre Defining generator, as well as some extra de
 The three main files are loaded with `gameFile`, `genreFile`, and `genreExtraFile` which are all just string paths to files.  
 There are three main variables - `altPostFreq` which is how often it uses the alternate "what if" output, `altGenreGameFreq` which is how often it uses the "game-like" variant for genres, and `altGenreExtraFreq` which is how often it takes from the extra list of rarer genres.
 All of these variables can be disabled with 0, or have a 1 in x chance of happening.  
+
+
+### Examples
+
+If you wish to post to multiple accounts with the same execution, you can pass account environment variables through `tweetBot.post()`. If these aren't passed, the poster will pull the necessary environment variables directly.
+```python
+def postRomanticsEbooks():
+
+    text = "This is a test"
+
+    dotenv.load_dotenv()
+    mastodonKeys = [
+        os.getenv("ACC1_MASTODON_CLIENT_ID"),
+        os.getenv("ACC1_MASTODON_CLIENT_SECRET"),
+        os.getenv("ACC1_MASTODON_ACCESS_TOKEN"),
+        os.getenv("ACC1_MASTODON_API_BASE_URL")
+    ]
+
+    tweetBot.post(text, twitterPost=False, mastodonKeys=mastodonKeys)
+```
