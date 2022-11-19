@@ -5,4 +5,6 @@ tweetBot.ebooksGen = tweetBot.generator.ebooksGen
 tweetBot.genreGen = tweetBot.generator.genreGen
 tweetBot.variantGen = tweetBot.generator.variantGen
 
-tweetBot.postTweet = tweetBot.poster.postTweet
+tweetBot.post = tweetBot.poster.post
+tweetBot.postTwitter = tweetBot.poster.postTwitter
+tweetBot.postMastodon = tweetBot.poster.postMastodon
