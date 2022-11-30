@@ -14,23 +14,23 @@ import os
 #-------------------------------------------------------------------------------
 def getKeysTwitter():
     dotenv.load_dotenv()
-    twitterKeys = [
-        os.getenv("TWITTER_CONSUMER_TOKEN"),
-        os.getenv("TWITTER_CONSUMER_SECRET"),
-        os.getenv("TWITTER_ACCESS_TOKEN"),
-        os.getenv("TWITTER_ACCESS_SECRET")
-    ]
+    twitterKeys = {
+        "TWITTER_CONSUMER_TOKEN": os.getenv("TWITTER_CONSUMER_TOKEN"),
+        "TWITTER_CONSUMER_SECRET": os.getenv("TWITTER_CONSUMER_SECRET"),
+        "TWITTER_ACCESS_TOKEN": os.getenv("TWITTER_ACCESS_TOKEN"),
+        "TWITTER_ACCESS_SECRET": os.getenv("TWITTER_ACCESS_SECRET")
+    }
     return twitterKeys;
 
 
 def getKeysMastodon():
     dotenv.load_dotenv()
-    mastodonKeys = [
-        os.getenv("MASTODON_CLIENT_ID"),
-        os.getenv("MASTODON_CLIENT_SECRET"),
-        os.getenv("MASTODON_ACCESS_TOKEN"),
-        os.getenv("MASTODON_API_BASE_URL")
-    ]
+    mastodonKeys = {
+        "MASTODON_CLIENT_ID": os.getenv("MASTODON_CLIENT_ID"),
+        "MASTODON_CLIENT_SECRET": os.getenv("MASTODON_CLIENT_SECRET"),
+        "MASTODON_ACCESS_TOKEN": os.getenv("MASTODON_ACCESS_TOKEN"),
+        "MASTODON_API_BASE_URL": os.getenv("MASTODON_API_BASE_URL")
+    }
     return mastodonKeys;
 
 
@@ -42,8 +42,8 @@ def getKeysMastodon():
 def setTwitter(twitterKeys):
     if twitterKeys is None:
         twitterKeys = getKeysTwitter()
-    auth = tweepy.OAuthHandler(twitterKeys[0], twitterKeys[1])
-    auth.set_access_token(twitterKeys[2], twitterKeys[3])
+    auth = tweepy.OAuthHandler(twitterKeys["TWITTER_CONSUMER_TOKEN"], twitterKeys["TWITTER_CONSUMER_SECRET"])
+    auth.set_access_token(twitterKeys["TWITTER_ACCESS_TOKEN"], twitterKeys["TWITTER_ACCESS_SECRET"])
     api = tweepy.API(auth)
     return api
 
@@ -52,10 +52,10 @@ def setMastodon(mastodonKeys):
     if mastodonKeys is None:
         mastodonKeys = getKeysMastodon()
     api = Mastodon(
-        client_id = mastodonKeys[0], 
-        client_secret = mastodonKeys[1], 
-        access_token = mastodonKeys[2], 
-        api_base_url = mastodonKeys[3]
+        client_id = mastodonKeys["MASTODON_CLIENT_ID"], 
+        client_secret = mastodonKeys["MASTODON_CLIENT_SECRET"], 
+        access_token = mastodonKeys["MASTODON_ACCESS_TOKEN"], 
+        api_base_url = mastodonKeys["MASTODON_API_BASE_URL"]
     )
     return api
 
