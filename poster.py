@@ -7,6 +7,7 @@ import random
 import dotenv
 import os
 import logging
+import str2bool
 
 
 
@@ -83,14 +84,11 @@ def post(text, postFreq=1, twitterPost=False, twitterKeys=None, mastodonPost=Fal
 
     # Fix variable types
     postFreq = int(postFreq) if postFreq is not None else 0
-    twitterPost = bool(twitterPost) if twitterPost is not None else False
-    mastodonPost = bool(mastodonPost) if mastodonPost is not None else False
+    twitterPost = str2bool(twitterPost) if twitterPost is not None else False
+    mastodonPost = str2bool(mastodonPost) if mastodonPost is not None else False
 
-    # If postFreq is set to 0, don't do anything.
-    if postFreq == 0:
-        tweetPostDebug = ("No")
     # Else, generate a random number using it, and if it's 1 then post the tweet
-    elif int(random.randint(1,postFreq)) == 1:
+    if postFreq != 0 and int(random.randint(1,postFreq)) == 1:
         tweetPostDebug = ("Yes")
         if twitterPost == True:
             postTwitter(text, twitterKeys)                               # Post the tweet
