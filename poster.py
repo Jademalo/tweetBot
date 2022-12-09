@@ -7,7 +7,7 @@ import random
 import dotenv
 import os
 import logging
-import str2bool
+from str2bool import str2bool
 
 
 
