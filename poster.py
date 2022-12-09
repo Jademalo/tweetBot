@@ -88,13 +88,14 @@ def post(text, postFreq=1, twitterPost=False, twitterKeys=None, mastodonPost=Fal
     mastodonPost = str2bool(mastodonPost) if mastodonPost is not None else False
 
     # Else, generate a random number using it, and if it's 1 then post the tweet
+    tweetPostDebug = tootPostDebug = ("No")
     if postFreq != 0 and int(random.randint(1,postFreq)) == 1:
-        tweetPostDebug = ("Yes")
         if twitterPost == True:
             postTwitter(text, twitterKeys)                               # Post the tweet
+            tweetPostDebug = ("Yes")
         if mastodonPost == True:
             postMastodon(text, mastodonKeys)                             # Post the toot
-    else:
-        tweetPostDebug = ("No")
+            tootPostDebug = ("Yes")
 
-    logging.info("Post? - %s", tweetPostDebug)
+    logging.info("Post to Twitter? - %s", tweetPostDebug)
+    logging.info("Post to Mastodon? - %s", tootPostDebug)
