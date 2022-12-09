@@ -2,6 +2,7 @@
 # Imports
 #-------------------------------------------------------------------------------
 import random
+import logging
 
 
 #-------------------------------------------------------------------------------
@@ -36,7 +37,10 @@ def randomList(list):
 #-------------------------------------------------------------------------------
 
 # Return a string of a random length and random amount of a text file
-def ebooksGen(file, maxLength=100, minLength=30):
+def ebooksGen(file, minLength=30, maxLength=100):
+    # Fix variable types
+    minLength = int(minLength) if minLength is not None else 30
+    maxLength = int(maxLength) if maxLength is not None else 100
     # Prevent a tweet being too long
     if maxLength > 280:
         maxLength = 280
@@ -57,12 +61,17 @@ def ebooksGen(file, maxLength=100, minLength=30):
     # Remove linebreaks
     finalTweet = workingTweet.replace('\n', ' ').replace('\r', '')
     # Return the final tweet
+    logging.info(finalTweet)
     return finalTweet
 
 
 # Return a string compositied from various files
 def genreGen(gameFile, genreFile, genreExtraFile, altPostFreq=0, altGenreGameFreq=0, altGenreExtraFreq=0):
 
+    # Fix variable types
+    altPostFreq = int(altPostFreq) if altPostFreq is not None else 0
+    altGenreGameFreq = int(altGenreGameFreq) if altGenreGameFreq is not None else 0
+    altGenreExtraFreq = int(altGenreExtraFreq) if altGenreExtraFreq is not None else 0
     # Convert the files into lists
     gameList = fileToList(gameFile)
     genreList = fileToList(genreFile)
@@ -118,7 +127,7 @@ def genreGen(gameFile, genreFile, genreExtraFile, altPostFreq=0, altGenreGameFre
 
 
     # Logic to decide if alternate format
-    altPost = randomInt(altPostFreq)
+    altPost = randomInt(altPostFreq) if altPostFreq != 0 else 0
     altPostDebug = ("No")
 
     # If statement to change the format of the question, then composite the final tweet
@@ -130,11 +139,22 @@ def genreGen(gameFile, genreFile, genreExtraFile, altPostFreq=0, altGenreGameFre
 
     tweetText = "".join(workingTweet)
 
-    return tweetText, altGenreGameDebug, altGenreExtraDebug, gameText, genreText, altPostDebug
+    logging.debug("Alternate Game as Genre? - %s", altGenreGameDebug)
+    logging.debug("Alternate Extra Genre? - %s", altGenreExtraDebug)
+    logging.debug("gameText = %s", gameText)
+    logging.debug("genreText = %s", genreText)
+    logging.debug("Alternate format? - %s", altPostDebug)
+    logging.info(tweetText)
+
+    return tweetText
 
 
 # Return a string composited from various files, with a random number of elements
-def variantGen(nameFile, prefixFile, suffixFile, extraPrefixPercent, suffixPercent):
+def variantGen(nameFile, prefixFile, suffixFile, extraPrefixPercent=0, suffixPercent=0):
+
+    # Fix variable types
+    extraPrefixPercent = int(extraPrefixPercent) if extraPrefixPercent is not None else 0
+    suffixPercent = int(suffixPercent) if suffixPercent is not None else 0
 
     # Convert the files into lists
     nameList = fileToList(nameFile)
@@ -172,4 +192,12 @@ def variantGen(nameFile, prefixFile, suffixFile, extraPrefixPercent, suffixPerce
 
     tweetText = "".join(workingTweet)
 
-    return tweetText, nameText, prefixText, suffixText, prefixExtraText, prefixExtraDebug, suffixDebug
+    logging.debug("Extra Prefix? - %s", prefixExtraDebug)
+    logging.debug("Suffix? - %s", suffixDebug)
+    logging.debug("nameText = %s", nameText)
+    logging.debug("prefixText = %s", prefixText)
+    logging.debug("prefixExtraText = %s", prefixExtraText)
+    logging.debug("suffixText = %s", suffixText)
+    logging.info(tweetText)
+
+    return tweetText

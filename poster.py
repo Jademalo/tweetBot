@@ -6,12 +6,19 @@ from mastodon import Mastodon
 import random
 import dotenv
 import os
+import logging
 
 
 
 #-------------------------------------------------------------------------------
+# Basic Functions
+#-------------------------------------------------------------------------------
+
+# Quick little function to convert a text string to a boolean
+def str2bool(v):
+    return str(v).lower() in ("yes", "true", "t", "1")
+
 # Function for returning the keys from environment variables
-#-------------------------------------------------------------------------------
 def getKeysTwitter():
     dotenv.load_dotenv()
     twitterKeys = {
@@ -76,7 +83,13 @@ def postMastodon(text, keys=None):
 # Post expects the text to be posted and the frequency at which to post.
 # You can disable twitter and mastodon posting by setting twitterPost and mastodonPost to false
 # If a key list is specified it will use that, if not it will pull from tweetBot's .env
-def post(text, postFreq=1, twitterPost=True, twitterKeys=None, mastodonPost=True, mastodonKeys=None):
+def post(text, postFreq=1, twitterPost=False, twitterKeys=None, mastodonPost=False, mastodonKeys=None):
+
+    # Fix variable types
+    postFreq = int(postFreq) if postFreq is not None else 0
+    twitterPost = str2bool(twitterPost) if twitterPost is not None else False
+    mastodonPost = str2bool(mastodonPost) if mastodonPost is not None else False
+
     # If postFreq is set to 0, don't do anything.
     if postFreq == 0:
         tweetPostDebug = ("No")
@@ -90,4 +103,4 @@ def post(text, postFreq=1, twitterPost=True, twitterKeys=None, mastodonPost=True
     else:
         tweetPostDebug = ("No")
 
-    print("Post? -", tweetPostDebug)
+    logging.info("Post? - %s", tweetPostDebug)
