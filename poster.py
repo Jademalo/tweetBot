@@ -80,12 +80,12 @@ def postMastodon(text, keys=None):
 # Post expects the text to be posted and the frequency at which to post.
 # You can disable twitter and mastodon posting by setting twitterPost and mastodonPost to false
 # If a key list is specified it will use that, if not it will pull from tweetBot's .env
-def post(text, postFreq=1, twitterPost=False, twitterKeys=None, mastodonPost=False, mastodonKeys=None):
+def post(text, postFreq=None, twitterPost=False, twitterKeys=None, mastodonPost=False, mastodonKeys=None):
 
     # Fix variable types
-    postFreq = int(postFreq) if postFreq is not None else 0
-    twitterPost = str2bool(twitterPost) if twitterPost is not None else False
-    mastodonPost = str2bool(mastodonPost) if mastodonPost is not None else False
+    postFreq = int(postFreq) if postFreq is not None else 20
+    twitterPost = str2bool(str(twitterPost)) if twitterPost is not None else False
+    mastodonPost = str2bool(str(mastodonPost)) if mastodonPost is not None else False
 
     # Else, generate a random number using it, and if it's 1 then post the tweet
     tweetPostDebug = tootPostDebug = ("No")
