@@ -46,9 +46,12 @@ def getKeysMastodon():
 def setTwitter(twitterKeys):
     if twitterKeys is None:
         twitterKeys = getKeysTwitter()
-    auth = tweepy.OAuthHandler(twitterKeys["TWITTER_CONSUMER_TOKEN"], twitterKeys["TWITTER_CONSUMER_SECRET"])
-    auth.set_access_token(twitterKeys["TWITTER_ACCESS_TOKEN"], twitterKeys["TWITTER_ACCESS_SECRET"])
-    api = tweepy.API(auth)
+    api = tweepy.Client(
+        consumer_key=twitterKeys["TWITTER_CONSUMER_TOKEN"], 
+        consumer_secret=twitterKeys["TWITTER_CONSUMER_SECRET"], 
+        access_token=twitterKeys["TWITTER_ACCESS_TOKEN"], 
+        access_token_secret=twitterKeys["TWITTER_ACCESS_SECRET"]
+    )
     return api
 
 # Make a mastodon instance using the keys from the provided account variables
@@ -70,7 +73,7 @@ def setMastodon(mastodonKeys):
 #-------------------------------------------------------------------------------
 def postTwitter(text, keys=None):
     twitter = setTwitter(keys)
-    twitter.update_status(status = text)
+    twitter.create_tweet(text=text)
 
 def postMastodon(text, keys=None):
         mastodon = setMastodon(keys)
