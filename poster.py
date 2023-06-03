@@ -73,11 +73,20 @@ def setMastodon(mastodonKeys):
 #-------------------------------------------------------------------------------
 def postTwitter(text, keys=None):
     twitter = setTwitter(keys)
-    twitter.create_tweet(text=text)
+    try:
+        response = twitter.create_tweet(text=text)
+        return f"https://twitter.com/user/status/{response.data['id']}", False
+    # If there is an error, return the error and set the flag to True for logging
+    except Exception as e: return e, True
+
 
 def postMastodon(text, keys=None):
-        mastodon = setMastodon(keys)
-        mastodon.toot(text)
+    mastodon = setMastodon(keys)
+    try:
+        response = mastodon.toot(text)
+        return response.url, False
+    # If there is an error, return the error and set the flag to True for logging
+    except Exception as e: return e, True
 
     
 # Post expects the text to be posted and the frequency at which to post.
@@ -91,14 +100,23 @@ def post(text, postFreq=None, twitterPost=False, twitterKeys=None, mastodonPost=
     mastodonPost = str2bool(str(mastodonPost)) if mastodonPost is not None else False
 
     # Else, generate a random number using it, and if it's 1 then post the tweet
-    tweetPostDebug = tootPostDebug = ("No")
+    tweetPostResponse = tootPostResponse = ("No")
+    tweetError = tootError = False
+
     if postFreq != 0 and int(random.randint(1,postFreq)) == 1:
         if twitterPost == True:
-            postTwitter(text, twitterKeys)                               # Post the tweet
-            tweetPostDebug = ("Yes")
+            tweetPostResponse, tweetError = postTwitter(text, twitterKeys)                 # Post the tweet
         if mastodonPost == True:
-            postMastodon(text, mastodonKeys)                             # Post the toot
-            tootPostDebug = ("Yes")
+            tootPostResponse, tootError = postMastodon(text, mastodonKeys)                 # Post the toot
+                
 
-    logging.info("Post to Twitter? - %s", tweetPostDebug)
-    logging.info("Post to Mastodon? - %s", tootPostDebug)
+    if not tweetError: 
+        logging.info("Post to Twitter? - "+tweetPostResponse)
+    else:
+        logging.error("Post to Twitter? - %s", tweetPostResponse)
+
+    if not tootError: 
+        logging.info("Post to Mastodon? - "+tootPostResponse)
+    else:
+        logging.error("Post to Mastodon? - %s", tootPostResponse)
+
